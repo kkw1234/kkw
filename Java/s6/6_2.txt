@@ -1,0 +1,83 @@
+//client below
+//=====================================
+import java.io.*;
+import java.net.*;
+import java.util.*;
+
+
+class c2_1c 
+{
+public static void main(String []args) throws IOException
+{
+Socket s=null;
+PrintWriter out=null;
+String str;
+
+	try
+	{
+	 s= new Socket("127.0.0.1",1234);
+	 out= new PrintWriter(s.getOutputStream(),true);
+	 BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+	str=br.readLine();
+	while(!str.equalsIgnoreCase("end"))
+	{
+	
+	 out.println(str);
+	 str=br.readLine();
+	 
+	}
+	out.println(str);
+	 s.close();
+	}
+
+catch(UnknownHostException e)
+{
+e.printStackTrace();
+}
+
+
+}
+
+}
+
+
+//===============================
+//Server Below 
+
+import java.io.*;
+import java.net.*;
+
+class s2_1s 
+{
+public static void main(String []args) throws IOException
+{
+Socket s=null;
+ServerSocket ss=null;
+String str;
+
+	try
+	{
+				 ss= new ServerSocket(1234);
+				 System.out.println("Server Started...");
+				 s=ss.accept();
+			     System.out.println("Server Connected...");
+				 BufferedReader br= new BufferedReader(new InputStreamReader(s.getInputStream()));
+				
+				 str=br.readLine();
+				 while(!str.equalsIgnoreCase("end"))
+				 {
+				 System.out.println(str);
+				 str=br.readLine();
+				 }
+				 s.close();
+	}
+
+catch(UnknownHostException e)
+{
+e.printStackTrace();
+}
+
+
+}
+
+}
